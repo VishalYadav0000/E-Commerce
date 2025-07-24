@@ -2,7 +2,7 @@ import React from "react";
 
 const StorySection = () => {
     return (
-        <div className="relative w-full h-[750px] sm:h-[600px] md:h-[750px]">
+        <div className="relative mt-10 w-full h-[750px] sm:h-[600px] md:h-[750px]">
             <video
                 className="w-full h-full object-cover"
                 autoPlay
