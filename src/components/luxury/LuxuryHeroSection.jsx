@@ -1,10 +1,12 @@
 import React from "react";
 
 const ShopSection = () => {
+  const labels = ['SHOP KARIGARI', 'SHOP LUXURY', 'SHOP KARIGARI', 'SHOP LUXURY', 'SHOP KARIGARI', 'SHOP LUXURY'];
+
   return (
     <div className="w-full bg-white">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 px-0">
-      
+
         <div className="relative">
           <img
             src="/luxury/Summer Delight 03 1.png"
@@ -30,31 +32,21 @@ const ShopSection = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 bg-[#800000] text-white text-lg font-medium py-4">
-        <button className="px-8 py-4 hover:bg-[#660000] transition-colors">
-          SHOP KARIGARI
-        </button>
-        <span className="px-4">★</span>
-        <button className="px-8 py-4 hover:bg-[#660000] transition-colors">
-          SHOP LUXURY
-        </button>
-        <span className="px-4">★</span>
-        <button className="px-8 py-4 hover:bg-[#660000] transition-colors">
-          SHOP KARIGARI
-        </button>
-        <span className="px-4">★</span>
-        <button className="px-8 py-4 hover:bg-[#660000] transition-colors">
-          SHOP LUXURY
-        </button>
-        <span className="px-4">★</span>
-        <button className="px-8 py-4 hover:bg-[#660000] transition-colors">
-          SHOP KARIGARI
-        </button>
-        <span className="px-4">★</span>
-        <button className="px-8 py-4 hover:bg-[#660000] transition-colors">
-          SHOP LUXURY
-        </button>
-        <span className="px-4">★</span>
+      <div className="flex flex-wrap justify-center gap-8 bg-[#6D001D] text-white py-4">
+        {labels.map((label, idx) => (
+          <React.Fragment key={idx}>
+            <button
+              className="
+              inline-flex items-center justify-center
+              w-[139px] h-[22px]
+              font-sans font-light text-[18px] leading-[22px] tracking-[0.03em]
+            "
+            >
+              {label}
+            </button>
+            {idx < labels.length - 1 && <span className="px-4">★</span>}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
