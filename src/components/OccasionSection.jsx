@@ -2,43 +2,41 @@ import React from "react";
 
 const OccasionSection = () => {
   return (
-    <div className="text-center mt-10 py-16 bg-white">
-      <h2 className="text-2xl md:text-3xl  text-[#052A3DD9]">
+    <div className="text-center py-16 bg-white">
+      <h2 className="text-2xl md:text-3xl text-[#052A3DD9]">
         Shop By Occasion
       </h2>
       <div className="mt-2 flex justify-center items-center">
-                    <img
-                        src="/design.png"
-                        alt="Decorative"
-                        className="mx-4 h-[48px] w-[346px] object-contain"
-                    />
-                </div>
+        <img
+          src="/design.png"
+          alt="Decorative"
+          className="mx-4 h-[48px] w-[346px] object-contain"
+        />
+      </div>
 
-      <div className="grid grid-cols-1 mt-10 md:grid-cols-3 gap-8 px-6 md:px-10">
-        {/* Office Wear Card */}
-        <div className="rounded-lg overflow-hidden shadow-md w-[396px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 md:px-10 mt-10">
+      
+        <div className="rounded-lg overflow-hidden shadow-md w-full max-w-[396px]">
           <img
             src="/Affordable/Group 5523.jpg"
             alt="Office Wear"
-            className="w-full h-[540px] object-cover"
+            className="w-full h-[320px] sm:h-[400px] md:h-[540px] object-cover"
           />
         </div>
 
-        {/* Festive Wear Card */}
-        <div className="rounded-lg overflow-hidden shadow-md w-[396px]">
+        <div className="rounded-lg overflow-hidden shadow-md w-full max-w-[396px]">
           <img
             src="/Affordable/Group 5522.jpg"
             alt="Festive Wear"
-            className="w-full h-[540px] object-cover"
+            className="w-full h-[320px] sm:h-[400px] md:h-[540px] object-cover"
           />
         </div>
 
-        {/* Casual Wear Card */}
-        <div className="rounded-lg overflow-hidden shadow-md w-[396px]">
+        <div className="rounded-lg overflow-hidden shadow-md w-full max-w-[396px]">
           <img
             src="/Affordable/Group 5521.jpg"
             alt="Casual Wear"
-            className="w-full h-[540px] object-cover"
+            className="w-full h-[320px] sm:h-[400px] md:h-[540px] object-cover"
           />
         </div>
       </div>

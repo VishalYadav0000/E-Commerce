@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FiSearch, FiHeart, FiShoppingCart } from "react-icons/fi";
+import { FiSearch, FiHeart, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const [showDropdown, setShowDropdown] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -24,82 +25,104 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 Step into Style and Discover Your Signature Look
             </div>
 
-            <div className="flex items-center justify-between px-8 py-4 bg-white shadow relative">
-                <div className="flex items-end gap-1">
-                    <span className="text-2xl font-bold text-[#a52729]">Atulya</span>
-                    <div className="bg-gradient-to-r from-[#f5c116] to-[#f39c12] text-white text-[10px] font-semibold px-2 py-1 rounded-sm leading-none">
-                        <span className="text-sm mr-1">Karigari</span>
-                        <span className="text-[8px] opacity-70">INDIA</span>
-                    </div>
-                </div>
-
-                <div className="flex gap-8 text-gray-700 font-medium text-sm">
-                    <a href="/" className="hover:text-black">HANDLOOM</a>
-                    <a href="/occasion" className="hover:text-black">SHOP BY OCCASION</a>
-                    <a href="/" className="hover:text-black">CRAFT STORIES</a>
-                    <a href="/footer" className="hover:text-black">ABOUT US</a>
-                </div>
-
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center bg-[#f7b4a3] px-4 py-2 rounded-full text-sm text-gray-700">
-                        <input
-                            type="text"
-                            placeholder="Search for Banarasi Sarees"
-                            className="bg-transparent outline-none placeholder-gray-700 w-48"
-                        />
-                        <FiSearch className="ml-2 text-gray-700" />
+            <div className="px-4 py-4  font-[Lato] bg-white shadow relative">
+                <div className="flex items-center justify-between">
+                    {/* Logo */}
+                    <div className="flex items-end gap-1">
+                        <span className="text-2xl font-bold text-[#a52729]">Atulya</span>
+                        <div className="bg-gradient-to-r from-[#f5c116] to-[#f39c12] text-white text-[10px] font-semibold px-2 py-1 rounded-sm leading-none">
+                            <span className="text-sm mr-1">Karigari</span>
+                            <span className="text-[8px] opacity-70">INDIA</span>
+                        </div>
                     </div>
 
-                    <FiHeart className="text-xl text-gray-700 cursor-pointer" />
-                    <FiShoppingCart className="text-xl text-gray-700 cursor-pointer" />
+                    <div className="md:hidden">
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            {mobileMenuOpen ? <FiX className="text-2xl text-gray-700" /> : <FiMenu className="text-2xl text-gray-700" />}
+                        </button>
+                    </div>
+                    <div className="hidden md:flex gap-8 text-gray-700 font-medium text-sm">
+                        <a href="/" className="hover:text-black">HANDLOOM</a>
+                        <a href="/occasion" className="hover:text-black">SHOP BY OCCASION</a>
+                        <a href="/" className="hover:text-black">CRAFT STORIES</a>
+                        <a href="/footer" className="hover:text-black">ABOUT US</a>
+                    </div>
 
-                    <div className="relative" ref={dropdownRef}>
-                        <div
-                            className="flex items-center gap-2 cursor-pointer"
-                            onClick={() => setShowDropdown(!showDropdown)}
-                        >
-                            <img
-                                src={isLoggedIn ? "/user-avatar.jpg" : "/guest-avatar.png"}
-                                alt="User"
-                                className="w-8 h-8 rounded-full object-cover border"
+                    <div className="hidden md:flex items-center gap-4">
+                        <div className="flex items-center bg-[#f7b4a3] px-4 py-2 rounded-full text-sm text-gray-700">
+                            <input
+                                type="text"
+                                placeholder="Search for Banarasi Sarees"
+                                className="bg-transparent outline-none placeholder-gray-700 w-48"
                             />
+                            <FiSearch className="ml-2 text-gray-700" />
                         </div>
 
-                        {showDropdown && (
-                            <div className="absolute right-0 mt-2 w-32 bg-white shadow-lg border rounded text-sm z-50">
-                                {!isLoggedIn ? (
-                                    <>
-                                        <a
-                                            href="/login"
-                                            className="block px-4 py-2 hover:bg-gray-100 text-gray-700"
-                                        >
-                                            Login
-                                        </a>
-                                        <a
-                                            href="/signup"
-                                            className="block px-4 py-2 hover:bg-gray-100 text-gray-700"
-                                        >
-                                            Sign Up
-                                        </a>
-                                    </>
-                                ) : (
-                                    <a
-                                        href="#"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            localStorage.removeItem("token");
-                                            setIsLoggedIn(false);
-                                            window.location.href = "/affordable";
-                                        }}
-                                        className="block px-4 py-2 hover:bg-gray-100 text-gray-700"
-                                    >
-                                        Logout
-                                    </a>
-                                )}
+                        <FiHeart className="text-xl text-gray-700 cursor-pointer" />
+                        <FiShoppingCart className="text-xl text-gray-700 cursor-pointer" />
+
+                        <div className="relative" ref={dropdownRef}>
+                            <div
+                                className="flex items-center gap-2 cursor-pointer"
+                                onClick={() => setShowDropdown(!showDropdown)}
+                            >
+                                <img
+                                    src={isLoggedIn ? "/user-avatar.jpg" : "/guest-avatar.png"}
+                                    alt="User"
+                                    className="w-8 h-8 rounded-full object-cover border"
+                                />
                             </div>
-                        )}
+
+                            {showDropdown && (
+                                <div className="absolute right-0 mt-2 w-32 bg-white shadow-lg border rounded text-sm z-50">
+                                    {!isLoggedIn ? (
+                                        <>
+                                            <a href="/login" className="block px-4 py-2 hover:bg-gray-100 text-gray-700">Login</a>
+                                            <a href="/signup" className="block px-4 py-2 hover:bg-gray-100 text-gray-700">Sign Up</a>
+                                        </>
+                                    ) : (
+                                        <a
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                localStorage.removeItem("token");
+                                                setIsLoggedIn(false);
+                                                window.location.href = "/affordable";
+                                            }}
+                                            className="block px-4 py-2 hover:bg-gray-100 text-gray-700"
+                                        >
+                                            Logout
+                                        </a>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
+
+                {/* Mobile Menu */}
+                {mobileMenuOpen && (
+                    <div className="mt-4 flex flex-col gap-4 md:hidden text-sm text-gray-700">
+                        <a href="/" className="hover:text-black">HANDLOOM</a>
+                        <a href="/occasion" className="hover:text-black">SHOP BY OCCASION</a>
+                        <a href="/" className="hover:text-black">CRAFT STORIES</a>
+                        <a href="/footer" className="hover:text-black">ABOUT US</a>
+
+                        <div className="flex items-center bg-[#f7b4a3] px-4 py-2 rounded-full text-gray-700 mt-2">
+                            <input
+                                type="text"
+                                placeholder="Search for Banarasi Sarees"
+                                className="bg-transparent outline-none placeholder-gray-700 w-full"
+                            />
+                            <FiSearch className="ml-2 text-gray-700" />
+                        </div>
+
+                        <div className="flex gap-4 items-center mt-2">
+                            <FiHeart className="text-xl text-gray-700 cursor-pointer" />
+                            <FiShoppingCart className="text-xl text-gray-700 cursor-pointer" />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

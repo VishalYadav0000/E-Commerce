@@ -15,7 +15,7 @@ const Footer = () => {
                             alt="Atulya Karigari"
                             className="h-12 w-auto"
                         />
-                        <p className="text-sm text-[#800000] mt-2 md:mt-0 font-[Poppins] font-normal text-[#052A3D]">
+                        <p className="text-sm text-[#800000] mt-2 md:mt-0 font-[Poppins]">
                             Where every thread tells a story of grace. Designed to be worn, cherished, and passed on.
                         </p>
                     </div>

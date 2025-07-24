@@ -23,12 +23,11 @@ const testimonials = [
 
 const Testimonials = () => {
     return (
-        <div className="bg-white px-8 md:px-8 py-12">
-
+        <div className="bg-white px-4 md:px-8">
             <h2 className="text-center text-2xl md:text-3xl text-[#052A3DD9]">
                 Testimonials
             </h2>
-            <div className=" flex justify-center items-center">
+            <div className="mt-2 flex justify-center items-center">
                 <img
                     src="/design.png"
                     alt="Decorative"
@@ -36,8 +35,7 @@ const Testimonials = () => {
                 />
             </div>
 
-
-            <div className="flex flex-col  mt-10 md:flex-row gap-5 items-stretch">
+            <div className="flex flex-col md:flex-row gap-5 mt-10 items-stretch">
 
                 <div className="md:w-1/2 relative flex flex-col justify-between">
                     <img
@@ -46,10 +44,10 @@ const Testimonials = () => {
                         className="w-full h-full object-cover rounded-lg"
                     />
                     <div className="absolute top-2 left-4 text-3xl leading-relaxed text-[#1e2b39]">
-                        Hear from our satisfied <br /> Clients have to say. <span className="text-[#0d2b36]">❤️</span>
+                        Hear from our satisfied <br /> Clients have to say.{" "}
+                        <span className="text-[#0d2b36]">❤️</span>
                     </div>
                 </div>
-
 
                 <div className="md:w-1/2 flex flex-col gap-6 justify-between">
                     {testimonials.map((item, idx) => (
@@ -57,7 +55,6 @@ const Testimonials = () => {
                             key={idx}
                             className="relative bg-[#65001b] text-white rounded-lg p-6 shadow-md h-full"
                         >
-
                             <div className="flex gap-1 mb-2">
                                 {[...Array(item.stars)].map((_, i) => (
                                     <svg
@@ -72,18 +69,15 @@ const Testimonials = () => {
                                 ))}
                             </div>
 
-
                             <p className="text-sm mb-4">"{item.text}"</p>
-
 
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
                                 <div>
-                                    <p className="font-semibold ">{item.author}</p>
+                                    <p className="font-semibold">{item.author}</p>
                                     <p className="text-xs">{item.location}</p>
                                 </div>
                             </div>
-
 
                             <div className="absolute top-4 right-4 w-7 h-7 bg-[#f9b5a0] rounded-md flex items-center justify-center cursor-pointer">
                                 <svg
@@ -105,7 +99,6 @@ const Testimonials = () => {
                     ))}
                 </div>
             </div>
-
         </div>
     );
 };

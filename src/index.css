@@ -1,23 +1,16 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@100;200;300;400;500;600;700&display=swap');
 
-/* Hide scrollbar but keep scroll functionality */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@100;200;300;400;500;600;700&display=swap');
-@import "tailwindcss";
-
-@theme {
-  --font-kalnia: "Kalnia", serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
 }
 
 @layer base {
   html, body {
-    font-family: var(--font-kalnia);
+    font-family: "Kalnia", serif;
   }
 }
