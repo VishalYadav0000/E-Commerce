@@ -15,7 +15,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, userId, cart, setCart }) => {
         if (userId) {
             const fetchCart = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:5000/api/cart?user_id=${userId}`);
+                    const response = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/cart?user_id=${userId}`);
                     setCartItems(response.data.cart.items);
                 } catch (error) {
                     console.error("Error fetching cart:", error);

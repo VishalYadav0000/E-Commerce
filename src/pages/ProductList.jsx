@@ -8,7 +8,7 @@ const ProductList = ({ userId, setCart }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/products`);
         setProducts(response.data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -28,7 +28,7 @@ const ProductList = ({ userId, setCart }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/cart/add", {
+      const response = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/cart/add`, {
         user_id: userId,
         product_id: product._id,
         quantity,

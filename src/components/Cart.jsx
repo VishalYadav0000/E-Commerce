@@ -18,7 +18,7 @@ const Cart = ({
             const fetchCart = async () => {
                 try {
                     const response = await axios.get(
-                        `http://localhost:5000/api/cart?user_id=${userId}`
+                        `${import.meta.env.VITE_APP_BASE_URL}/cart?user_id=${userId}`
                     );
                     setCartItems(response.data.cart.items);
                 } catch (error) {
@@ -41,7 +41,7 @@ const Cart = ({
                 return;
             }
             try {
-                const response = await axios.post("http://localhost:5000/api/orders/place", {
+                const response = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/orders/place`, {
                     user_id: userId,
                     payment_method: "COD",
                 });

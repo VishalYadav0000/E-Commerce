@@ -25,7 +25,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/products/add", product);
+      const response = await axios.post( `${import.meta.env.VITE_APP_BASE_URL}/products/add`, product);
       setMessage("Product added successfully!");
       setProduct({
         name: "",
