@@ -34,16 +34,22 @@ const LoginPage = ({setIsLoggedIn}) => {
             type="text"
             placeholder="Enter your phone number"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              const input = e.target.value;
+              if (/^\d{0,10}$/.test(input)) {
+                setPhone(input);
+              }
+            }}
             className="w-full border px-4 py-2 rounded outline-none"
             required
           />
+
           <input
             type="password"
             name="password"
             placeholder="Password"
             value={password}
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full border px-4 py-2 rounded outline-none"
             required
           />
