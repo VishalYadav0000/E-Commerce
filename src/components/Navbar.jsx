@@ -1,10 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FiSearch, FiHeart, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
+import axios from "axios";
+import Cart from "./Cart";
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn, userId, cart, setCart }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
+    const [showCart, setShowCart] = useState(false);
+    const [orderStatus, setOrderStatus] = useState("");
     const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        if (userId) {
+            const fetchCart = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:5000/api/cart?user_id=${userId}`);
+                    setCartItems(response.data.cart.items);
+                } catch (error) {
+                    console.error("Error fetching cart:", error);
+                }
+            };
+            fetchCart();
+        }
+    }, [userId, cart]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -18,14 +37,16 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         };
     }, []);
 
+
+    const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
     return (
         <div className="w-full">
-
             <div className="bg-[#720d29] text-white text-[12px] text-center py-1">
                 Step into Style and Discover Your Signature Look
             </div>
 
-            <div className="px-4 py-4  font-[Lato] bg-white shadow relative">
+            <div className="px-4 py-4 font-[Lato] bg-white shadow relative">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <div className="flex items-end gap-1">
@@ -41,6 +62,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                             {mobileMenuOpen ? <FiX className="text-2xl text-gray-700" /> : <FiMenu className="text-2xl text-gray-700" />}
                         </button>
                     </div>
+
                     <div className="hidden md:flex gap-8 text-gray-700 font-medium text-sm">
                         <a href="/" className="hover:text-black">HANDLOOM</a>
                         <a href="/occasion" className="hover:text-black">SHOP BY OCCASION</a>
@@ -59,7 +81,15 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                         </div>
 
                         <FiHeart className="text-xl text-gray-700 cursor-pointer" />
-                        <FiShoppingCart className="text-xl text-gray-700 cursor-pointer" />
+
+                        <div className="relative" onClick={() => setShowCart(!showCart)}>
+                            <FiShoppingCart className="text-xl text-gray-700 cursor-pointer" />
+                            {totalCartItems > 0 && (
+                                <div className="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                                    {totalCartItems}
+                                </div>
+                            )}
+                        </div>
 
                         <div className="relative" ref={dropdownRef}>
                             <div
@@ -119,11 +149,37 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
                         <div className="flex gap-4 items-center mt-2">
                             <FiHeart className="text-xl text-gray-700 cursor-pointer" />
-                            <FiShoppingCart className="text-xl text-gray-700 cursor-pointer" />
+                            <div className="relative">
+                                <FiShoppingCart
+                                    className="text-xl text-gray-700 cursor-pointer"
+                                    onClick={() => setShowCart(true)}
+                                />
+                                {totalCartItems > 0 && (
+                                    <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                                        {totalCartItems}
+                                    </div>
+                                )}
+                            </div>
+
                         </div>
                     </div>
                 )}
             </div>
+
+            {showCart && (
+                <Cart
+                    userId={userId}
+                    cart={cart}
+                    cartItems={cartItems}
+                    setCartItems={setCartItems}
+                    setOrderStatus={setOrderStatus}
+                    orderStatus={orderStatus}
+                    showCart={showCart}
+                    setShowCart={setShowCart}
+                />
+            )}
+
+
         </div>
     );
 };
